@@ -15,7 +15,7 @@ function rps(api) {
   function choose(who, i) {
     if (busy) return;
     if (api.bot) { busy = true; resolve(i, Math.random() < [0, 0.2, 0.4, 1][api.lv] ? (i + 1) % 3 : Math.floor(Math.random() * 3)); first = i; }
-    else if (who === 0) { first = i; area.innerHTML = `<div class="cover"><h3>${api.names[0]} locked in 🔒</h3><p class="muted">Pass the device to ${api.names[1]}</p><br><button class="btn primary" id="rdy">I'm ready</button></div>`; api.status(''); $('#rdy', area).onclick = () => pickUI(1); }
+    else if (who === 0) { first = i; area.innerHTML = `<div class="cover"><h3>${api.names[0]} locked in</h3><p class="muted">Pass the device to ${api.names[1]}</p><br><button class="btn primary" id="rdy">I'm ready</button></div>`; api.status(''); $('#rdy', area).onclick = () => pickUI(1); }
     else { busy = true; resolve(first, i); }
   }
   function resolve(a, b) {
