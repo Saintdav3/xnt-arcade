@@ -15,3 +15,17 @@
 .result-card{text-align:center;padding:36px 40px;border-radius:12px;background:var(--surface);border:1px solid var(--line);max-width:92vw}
 .result h2{font-size:44px;margin-bottom:8px}
 .row-btns{display:flex;gap:10px;justify-content:center;margin-top:24px;flex-wrap:wrap}
+
+/* Ragebait taunt animations */
+.result-card[data-anim]{transform:rotate(var(--tilt,0deg));border-width:3px;box-shadow:0 0 40px currentColor}
+.result-card[data-anim] h2{text-transform:uppercase}
+.result-card[data-anim=shake]{animation:rbShake .5s 2}
+.result-card[data-anim=wobble]{animation:rbWobble .9s 2}
+.result-card[data-anim=bounce]{animation:rbBounce .6s 3}
+.result-card[data-anim=spin]{animation:rbSpin .8s 1}
+.result-card[data-anim=pulse]{animation:rbPulse .5s 4}
+@keyframes rbShake{0%,100%{translate:0}20%{translate:-14px}40%{translate:14px}60%{translate:-10px}80%{translate:10px}}
+@keyframes rbWobble{0%,100%{rotate:0deg}25%{rotate:-8deg}75%{rotate:8deg}}
+@keyframes rbBounce{0%,100%{translate:0 0}50%{translate:0 -30px}}
+@keyframes rbSpin{from{rotate:-360deg;scale:.2}to{rotate:0deg;scale:1}}
+@keyframes rbPulse{0%,100%{scale:1}50%{scale:1.08}}
