@@ -63,7 +63,6 @@ const TAUNTS = [
     'Hahahaha! {n} losses! Frame this one!', 'Genius move, as always. Said no one ever.', 'Maybe the game is too hard. For you. Specifically.'
   ]
 ];
-const TAUNT_EMOJI = ['😂', '🤣', '😹', '💀', '🤡', '🙄', '😏', '🫵', '🥱', '😭'];
 const TAUNT_TITLES = ['LOL. You lost.', 'HAHAHA!', 'Skill issue.', 'Embarrassing.', 'Ouch. Again?', 'You lose. Shocking.', 'Not smart.', 'L + ratio', 'Typical.', 'GG (for me)'];
 const TAUNT_STYLES = [
   { bg: '#3b0d0d', fg: '#ff6b6b', anim: 'shake' }, { bg: '#2a0d3b', fg: '#d98cff', anim: 'wobble' },
@@ -89,13 +88,15 @@ function ragebaitTaunt() {
   let si; do { si = Math.floor(Math.random() * TAUNT_STYLES.length); } while (si === session.lastStyle);
   session.lastStyle = si;
   const st = TAUNT_STYLES[si], card = $('.result-card');
-  const emojis = Array.from({ length: Math.min(3 + n, 10) }, () => pick(TAUNT_EMOJI)).join(' ');
+  // The laugh gets longer and louder the more you lose.
+  const ha = Array(Math.min(2 + n, 7)).fill('HA').join(' ') + '!';
   card.dataset.anim = st.anim;
   card.style.background = st.bg; card.style.borderColor = st.fg; card.style.color = st.fg;
   card.style.setProperty('--tilt', rand(-4, 4).toFixed(1) + 'deg');
   card.style.animation = 'none'; void card.offsetWidth; card.style.animation = '';
   $('#rTitle').textContent = pick(TAUNT_TITLES);
-  $('#rSub').textContent = `${emojis}\n${line.replace('{n}', n)}\nSession score ${session.scores[0]} : ${session.scores[1]}.`;
+  $('#rSub').textContent = `${line.replace('{n}', n)}\nSession score ${session.scores[0]} : ${session.scores[1]}.`;
+  $('#rLaugh').textContent = ha;
   $('#rSub').style.whiteSpace = 'pre-line'; $('#rSub').style.color = 'inherit';
   $('#rematch').textContent = pick(['Embarrass me again', 'Try again, genius', 'One more loss?', 'I can win (I cannot)', 'Again']);
   laugh(n);
@@ -104,7 +105,7 @@ function ragebaitTaunt() {
 function resetResultCard() {
   const card = $('.result-card');
   card.removeAttribute('data-anim'); card.style.cssText = '';
-  $('#rSub').style.cssText = ''; $('#rematch').textContent = 'Again';
+  $('#rLaugh').textContent = ''; $('#rSub').style.cssText = ''; $('#rematch').textContent = 'Again';
 }
 function leave() {
   if (window.speechSynthesis) { try { speechSynthesis.cancel(); } catch {} }

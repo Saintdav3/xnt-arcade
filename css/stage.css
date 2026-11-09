@@ -29,3 +29,5 @@
 @keyframes rbBounce{0%,100%{translate:0 0}50%{translate:0 -30px}}
 @keyframes rbSpin{from{rotate:-360deg;scale:.2}to{rotate:0deg;scale:1}}
 @keyframes rbPulse{0%,100%{scale:1}50%{scale:1.08}}
+.r-laugh{font-size:clamp(22px,6vw,34px);font-weight:900;letter-spacing:.08em;margin:0 0 10px;opacity:.9}
+.r-laugh:empty{display:none}
