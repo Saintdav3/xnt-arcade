@@ -1,0 +1,4 @@
+Audio from OpenGameArt.org, all CC0 (public domain):
+- music.mp3  "8 bit epic space shooter music" by HydroGene  https://opengameart.org/content/8-bit-epic-space-shooter-music
+- win.mp3    "Victory fanfare short" by cynicmusic         https://opengameart.org/content/victory-fanfare-short
+- lose.m4a   "Game over 0" by zuvizu (converted from WAV)   https://opengameart.org/content/game-over-0

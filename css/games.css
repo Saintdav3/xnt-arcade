@@ -1,0 +1,189 @@
+/* ===== Tic-Tac-Toe ===== */
+.ttt{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:min(420px,88vw);aspect-ratio:1}
+.ttt button{border-radius:var(--r);background:var(--surface);border:1px solid var(--line);font-family:var(--font-head);font-size:clamp(46px,12vw,84px);display:grid;place-items:center;transition:background .12s;line-height:1}
+.ttt button:not(:disabled):hover{background:var(--surface-2)}
+.ttt button.X{color:var(--p0)}
+.ttt button.O{color:var(--p1)}
+.ttt button.win{border-color:var(--text);box-shadow:inset 0 0 0 2px var(--text)}
+
+/* ===== Connect Four ===== */
+.c4{display:grid;grid-template-columns:repeat(7,1fr);padding:12px;border-radius:12px;background:var(--surface-2);border:1px solid var(--line);width:min(560px,94vw)}
+.c4 .col{display:grid;grid-template-rows:repeat(6,1fr);gap:8px;padding:4px;border-radius:var(--r);cursor:pointer;transition:background .12s}
+.c4 .col:hover{background:rgba(255,255,255,.07)}
+.c4 .cell{aspect-ratio:1;border-radius:50%;background:var(--bg);position:relative;overflow:hidden}
+.c4 .disc{position:absolute;inset:0;border-radius:50%;animation:drop .5s cubic-bezier(.5,0,.8,.6) both;animation-duration:calc(.25s + var(--row)*.07s)}
+.c4 .disc.p0{background:var(--p0)}
+.c4 .disc.p1{background:var(--p1)}
+.c4 .disc.win{box-shadow:inset 0 0 0 5px var(--text)}
+
+/* ===== Hands (RPS) and picks ===== */
+.duel{display:flex;flex-direction:column;align-items:center;gap:26px;width:min(720px,96vw)}
+.picks{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+.pick{width:clamp(96px,26vw,150px);aspect-ratio:1;border-radius:var(--r);background:var(--surface);border:1px solid var(--line);font-size:clamp(46px,12vw,70px);display:grid;place-items:center;transition:background .12s,border-color .12s}
+.pick .ico{width:.9em;height:.9em;margin:0 auto 6px;color:var(--primary)}
+.pick small{display:block;font-size:14px;color:var(--muted);font-weight:700;margin-top:-6px;font-family:var(--font-body)}
+.pick:not(:disabled):hover{background:var(--surface-2);border-color:var(--primary)}
+.pick:disabled{opacity:.4;cursor:default}
+.reveal{display:flex;align-items:center;gap:clamp(18px,6vw,60px);font-size:clamp(70px,20vw,130px);min-height:150px}
+.reveal .hand .ico{width:1em;height:1em;color:var(--primary)}
+.reveal #h1 .ico{color:var(--text)}
+.reveal .hand{animation:shake .7s ease-in-out;display:inline-block}
+.reveal .vs{font-size:20px;color:var(--muted);font-weight:700;font-family:var(--font-mono)}
+.reveal .hand.lose{opacity:.3;filter:grayscale(1)}
+.cover{padding:56px 40px;text-align:center;border-radius:var(--r);background:var(--surface);border:1px solid var(--line);width:100%}
+.cover h3{font-size:28px;margin-bottom:12px}
+
+/* ===== Coin ===== */
+.coin-wrap{perspective:900px;height:200px;display:grid;place-items:center}
+.coin{width:150px;height:150px;position:relative;transform-style:preserve-3d}
+.coin div{position:absolute;inset:0;border-radius:50%;display:grid;place-items:center;font-family:var(--font-head);font-size:62px;backface-visibility:hidden;background:var(--text);color:var(--bg);border:8px solid var(--muted)}
+.coin .tails{transform:rotateY(180deg)}
+.coin.flip{animation:flipc 1.6s cubic-bezier(.3,.7,.3,1) forwards}
+
+/* ===== Quick Draw ===== */
+.react{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:min(900px,96vw);height:min(62vh,460px)}
+.rpad{border-radius:12px;border:2px solid var(--line);background:var(--surface);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font-weight:700;user-select:none;-webkit-user-select:none}
+.rpad .big{font-family:var(--font-head);font-size:clamp(48px,10vw,96px);line-height:1}
+.rpad small{color:var(--muted);font-size:15px;min-height:22px}
+/* real state: grey = wait, green = go */
+.react.wait .rpad{border-color:var(--muted)}
+.react.go .rpad{background:var(--primary);border-color:var(--primary);color:var(--on-primary)}
+.react.go .rpad small{color:var(--on-primary)}
+
+/* ===== Pong ===== */
+.pong{width:min(900px,96vw);aspect-ratio:16/10;border-radius:12px;border:1px solid var(--line);touch-action:none;display:block}
+
+/* ===== Reversi ===== */
+.rv{display:grid;grid-template-columns:repeat(8,1fr);gap:3px;width:min(520px,94vw);aspect-ratio:1;padding:6px;background:var(--line);border-radius:12px}
+.rv button{background:var(--surface);display:grid;place-items:center;border-radius:4px;position:relative}
+.rv button:not(:disabled):hover{background:var(--surface-2)}
+.rv .disc{width:78%;aspect-ratio:1;border-radius:50%;display:block}
+.rv .disc.p0{background:var(--p0)}
+.rv .disc.p1{background:var(--p1)}
+.rv .hint{width:22%;aspect-ratio:1;border-radius:50%;background:var(--muted);display:block}
+
+/* ===== Dots & Boxes ===== */
+.dots{width:min(480px,94vw);aspect-ratio:1}
+.dots .eline{stroke:var(--line);stroke-width:8;stroke-linecap:round}
+.dots .ehit{stroke:transparent;stroke-width:30;stroke-linecap:round;cursor:pointer}
+.dots .edge:hover .eline{stroke:var(--muted)}
+.dots .eline.e0{stroke:var(--p0)}
+.dots .eline.e1{stroke:var(--p1)}
+.dots .ddot{fill:var(--text)}
+.dots .dbox{fill:transparent}
+.dots .dbox.b0{fill:var(--p0);fill-opacity:.35}
+.dots .dbox.b1{fill:var(--p1);fill-opacity:.3}
+
+/* ===== Memory ===== */
+.mem{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;width:min(440px,92vw)}
+.mcard{aspect-ratio:1;border-radius:var(--r);background:var(--surface-2);border:1px solid var(--line);display:grid;place-items:center;transition:background .12s,border-color .12s}
+.mcard:hover{border-color:var(--muted)}
+.mcard .mf{opacity:0;width:60%;color:var(--primary)}
+.mcard .mf .ico{width:100%;height:100%}
+.mcard.open,.mcard.done{background:var(--surface)}
+.mcard.open .mf,.mcard.done .mf{opacity:1}
+.mcard.open{border-color:var(--primary)}
+.mcard.done{border-color:var(--line);opacity:.45}
+
+/* ===== Tug of War ===== */
+.tug{display:flex;flex-direction:column;gap:28px;width:min(760px,96vw)}
+.tug-bar{position:relative;height:30px;border-radius:99px;background:var(--p1);overflow:hidden;border:1px solid var(--line)}
+.tug-fill{position:absolute;left:0;top:0;bottom:0;background:var(--p0);width:50%}
+.tug-mark{position:absolute;top:0;bottom:0;width:6px;margin-left:-3px;background:var(--bg);left:50%}
+.tug-pads{display:grid;grid-template-columns:1fr 1fr;gap:14px;height:min(40vh,300px)}
+.tug-pads .rpad:active{background:var(--surface-2)}
+
+/* ===== Dice Duel ===== */
+.dice{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:min(760px,96vw)}
+.dside{display:flex;flex-direction:column;align-items:center;gap:16px;padding:28px 16px;border-radius:12px;background:var(--surface);border:1px solid var(--line)}
+.dside.p0 b{color:var(--p0)}
+.dfaces{display:flex;gap:12px}
+.dfaces .die{width:clamp(56px,13vw,92px);color:var(--text)}
+.dside.p0 .die{color:var(--p0)}
+.dtot{font-family:var(--font-mono);font-size:40px;font-weight:700;min-height:52px}
+
+/* ===== Gomoku ===== */
+.gmk{display:grid;grid-template-columns:repeat(11,1fr);width:min(560px,94vw);aspect-ratio:1;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:8px}
+.gmk button{position:relative;background:linear-gradient(var(--line),var(--line)) center/100% 2px no-repeat,linear-gradient(var(--line),var(--line)) center/2px 100% no-repeat;display:grid;place-items:center}
+.gmk button:not(:disabled):hover::after{content:"";width:40%;aspect-ratio:1;border-radius:50%;background:var(--muted)}
+.stone{width:78%;aspect-ratio:1;border-radius:50%;display:block}
+.stone.p0{background:var(--p0)}.stone.p1{background:var(--p1)}
+.gmk button.win .stone{box-shadow:0 0 0 3px var(--bg),0 0 0 6px var(--text)}
+
+/* ===== Nim ===== */
+.nim{display:flex;flex-direction:column;gap:18px;align-items:center}
+.nrow{display:flex;gap:12px}
+.nstone{width:clamp(34px,8vw,52px);aspect-ratio:1;border-radius:50%;background:var(--p0);transition:background .12s,opacity .12s}
+.nstone.hl{background:var(--p1);opacity:.5}
+.nstone:disabled{cursor:default}
+
+/* ===== Cards (Higher or Lower, Blackjack) ===== */
+.pcard{width:clamp(70px,16vw,110px);aspect-ratio:5/7;border-radius:10px;background:var(--text);color:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--font-head)}
+.pcard b{font-size:clamp(30px,7vw,48px);font-weight:400;line-height:1}
+.pcard span{font-size:clamp(22px,5vw,34px);line-height:1.1}
+.pcard.back{background:var(--surface-2);color:var(--muted);border:2px solid var(--line)}
+.hilo{display:flex;flex-direction:column;align-items:center;gap:28px}
+.hcards{display:flex;gap:20px}
+.bj{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:min(820px,96vw)}
+.bjside{display:flex;flex-direction:column;align-items:center;gap:14px;padding:22px 12px;border-radius:12px;background:var(--surface);border:1px solid var(--line)}
+.bjside.p0 b{color:var(--p0)}
+.bjcards{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;min-height:clamp(98px,22vw,154px)}
+.bjtot{font-family:var(--font-mono);font-size:34px;font-weight:700;min-height:44px}
+
+/* ===== Checkers ===== */
+.ck{display:grid;grid-template-columns:repeat(8,1fr);width:min(560px,94vw);aspect-ratio:1;border-radius:10px;overflow:hidden;border:1px solid var(--line)}
+.ck .light{background:var(--surface-2)}
+.ck .dark{background:#050505;display:grid;place-items:center;position:relative}
+.ck .dark.sel{box-shadow:inset 0 0 0 3px var(--text)}
+.ck .dark.target::after{content:"";width:28%;aspect-ratio:1;border-radius:50%;background:var(--muted);position:absolute}
+.piece{width:76%;aspect-ratio:1;border-radius:50%;display:block;position:relative}
+.piece.p0{background:var(--p0)}.piece.p1{background:var(--p1)}
+.piece.king::after{content:"";position:absolute;inset:28%;border-radius:50%;border:3px solid var(--bg)}
+
+/* ===== Battleship ===== */
+.bs{display:flex;gap:24px;flex-wrap:wrap;justify-content:center;align-items:flex-start}
+.bside{display:flex;flex-direction:column;gap:10px;align-items:center}
+.bside>b{font-size:15px;color:var(--muted)}
+.bgrid{display:grid;grid-template-columns:repeat(8,1fr);gap:3px;width:min(340px,86vw);aspect-ratio:1;padding:6px;background:var(--line);border-radius:10px}
+.bcell{background:var(--surface);border-radius:4px;position:relative}
+.bgrid.live .bcell:not(:disabled):hover{background:var(--surface-2)}
+.bcell.ship{background:#3a3a3a}
+.bcell.miss::after{content:"";position:absolute;inset:36%;border-radius:50%;background:var(--muted)}
+.bcell.hit{background:var(--p0)}
+.bcell.hit::after{content:"";position:absolute;inset:34%;border-radius:50%;background:var(--bg)}
+
+/* ===== Maze games and Snake ===== */
+.maze{width:min(900px,96vw);height:auto;border-radius:12px;border:1px solid var(--line);display:block;touch-action:none}
+
+/* ===== Whack Race ===== */
+.whack{display:grid;grid-template-columns:1fr 1fr;gap:20px;width:min(760px,96vw)}
+.wboard{display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px;border-radius:12px;background:var(--surface);border:1px solid var(--line)}
+.wboard.p0>b{color:var(--p0)}
+.wgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:100%}
+.hole{aspect-ratio:1;border-radius:50%;background:var(--bg);border:2px solid var(--line);position:relative}
+.hole.up{background:var(--p1);border-color:var(--p1)}
+.wboard.p0 .hole.up{background:var(--p0);border-color:var(--p0)}
+.hole:disabled{cursor:default}
+
+/* ===== Smoothness: easing on every state change ===== */
+.ttt button span{animation:appear .2s var(--ease) backwards}
+.stone{animation:appear .22s var(--ease) backwards}
+.rv .disc{transition:background-color .35s var(--ease);animation:appear .24s var(--ease) backwards}
+.rv button.hintcell::after{content:"";width:22%;aspect-ratio:1;border-radius:50%;background:var(--muted);animation:appear .2s var(--ease) backwards}
+.rv .hint{display:none}
+.piece{transition:background-color .2s var(--ease)}
+.ck .dark,.ck .light{transition:box-shadow .15s var(--ease)}
+.mcard{transition:background-color .22s var(--ease),border-color .22s var(--ease),opacity .3s var(--ease)}
+.mcard .mf{transition:opacity .22s var(--ease)}
+.tug-fill{transition:width .14s var(--ease)}
+.tug-mark{transition:left .14s var(--ease)}
+.dots .eline{transition:stroke .18s var(--ease)}
+.dots .dbox{transition:fill .3s var(--ease),fill-opacity .3s var(--ease)}
+.rpad{transition:background-color .15s var(--ease),border-color .15s var(--ease),color .15s var(--ease)}
+.hole{transition:background-color .12s var(--ease),border-color .12s var(--ease)}
+.hcards .pcard{animation:dealin .32s var(--ease) backwards}
+.bcell{transition:background-color .2s var(--ease)}
+.result-card{animation:riseIn .3s var(--ease)}
+.sheet{animation:riseIn .26s var(--ease)}
+.tile{transition:border-color .2s var(--ease),background-color .2s var(--ease)}
+.pong,.maze{will-change:transform}

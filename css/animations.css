@@ -1,0 +1,11 @@
+/* Motion only where game state changes. */
+@keyframes fade{from{opacity:0}}
+@keyframes drop{from{transform:translateY(calc(-110% * (var(--row) + 1) - 20px))}}
+@keyframes shake{0%,100%{transform:translateY(0) rotate(0)}25%{transform:translateY(-24px) rotate(-10deg)}50%{transform:translateY(8px) rotate(6deg)}75%{transform:translateY(-24px) rotate(-10deg)}}
+@keyframes flipc{from{transform:translateY(0) rotateY(0)}30%{transform:translateY(-120px) rotateY(var(--spin))}to{transform:translateY(0) rotateY(var(--end))}}
+
+@keyframes appear{from{opacity:0;transform:scale(.72)}}
+@keyframes dealin{from{opacity:0;transform:translateY(-14px)}}
+@keyframes riseIn{from{opacity:0;transform:translateY(12px)}}
+
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01s!important;transition-duration:.01s!important}}

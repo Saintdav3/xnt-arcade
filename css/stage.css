@@ -1,0 +1,17 @@
+.stage{position:fixed;inset:0;z-index:40;background:var(--bg);display:flex;flex-direction:column;animation:fade .15s;overflow:auto;touch-action:manipulation}
+.stage-top{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;padding:14px clamp(14px,3vw,36px)}
+.stage-top .btn{justify-self:start;width:auto}
+.stage-title{justify-self:end;font-size:14px;color:var(--muted)}
+.scorebar{display:flex;align-items:center;gap:18px;padding:10px 22px;border-radius:var(--r);background:var(--surface);border:1px solid var(--line)}
+.who{font-weight:700;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.who.p0{color:var(--p0)}
+.who.p1{color:var(--p1)}
+.score{display:flex;gap:8px;font-family:var(--font-mono);font-size:26px;align-items:center}
+.score i{color:var(--muted);font-style:normal}
+.status{text-align:center;font-size:clamp(18px,2.4vw,22px);font-weight:700;min-height:34px;padding:6px 16px}
+.arena{flex:1;display:flex;align-items:center;justify-content:center;padding:10px 14px 30px;min-height:0}
+
+.result{position:fixed;inset:0;z-index:60;display:grid;place-items:center;background:rgba(0,0,0,.72);animation:fade .2s}
+.result-card{text-align:center;padding:36px 40px;border-radius:12px;background:var(--surface);border:1px solid var(--line);max-width:92vw}
+.result h2{font-size:44px;margin-bottom:8px}
+.row-btns{display:flex;gap:10px;justify-content:center;margin-top:24px;flex-wrap:wrap}

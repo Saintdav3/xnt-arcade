@@ -1,0 +1,26 @@
+'use strict';
+const GAMES = [
+  { id: 'c4', name: 'Connect Four', sub: 'Drop four in a line', tag: 'Strategy', fn: connect4, controls: 'Click a column.' },
+  { id: 'ttt', name: 'Tic-Tac-Toe', sub: 'Three in a row', tag: 'Strategy', fn: tictactoe, controls: 'Click a square.' },
+  { id: 'pong', name: 'Pong', sub: 'First to 5', tag: 'Reflex', fn: pong, controls: 'P1: W/S. P2: up/down. Touch: drag.' },
+  { id: 'react', name: 'Quick Draw', sub: 'Hit it on green', tag: 'Reflex', fn: quickDraw, controls: 'P1: A or Space. P2: L. Touch: tap.' },
+  { id: 'reversi', name: 'Reversi', sub: 'Flip the board', tag: 'Strategy', fn: reversi, controls: 'Click a marked square.' },
+  { id: 'dots', name: 'Dots & Boxes', sub: 'Claim the boxes', tag: 'Strategy', fn: dotsBoxes, controls: 'Click a line between two dots.' },
+  { id: 'memory', name: 'Memory Match', sub: 'Find the pairs', tag: 'Strategy', fn: memory, controls: 'Click two cards to flip them.' },
+  { id: 'hockey', name: 'Air Hockey', sub: 'First to 5', tag: 'Reflex', fn: airHockey, controls: 'P1: WASD or mouse. P2: arrow keys. Touch: drag.' },
+  { id: 'tug', name: 'Tug of War', sub: 'Tap faster', tag: 'Reflex', fn: tugOfWar, controls: 'P1: A or Space. P2: L. Touch: tap your side.' },
+  { id: 'dice', name: 'Dice Duel', sub: 'Highest roll', tag: 'Luck', fn: diceDuel, controls: 'Press Roll. First to 3 rounds.' },
+  { id: 'gomoku', name: 'Gomoku', sub: 'Five in a row', tag: 'Strategy', fn: gomoku, controls: 'Click a point. First to five in a row wins.' },
+  { id: 'nim', name: 'Nim', sub: 'Take the last stone', tag: 'Strategy', fn: nim, controls: 'Click a stone to take it and the ones to its right.' },
+  { id: 'checkers', name: 'Checkers', sub: 'Jump to capture', tag: 'Strategy', fn: checkers, controls: 'Click a piece, then a highlighted square. Captures are forced.' },
+  { id: 'battleship', name: 'Battleship', sub: 'Sink all four ships', tag: 'Strategy', fn: battleship, controls: 'Click a square on the enemy grid to fire.' },
+  { id: 'hilo', name: 'Higher or Lower', sub: 'Call the next card', tag: 'Luck', fn: hiLo, controls: 'Call higher or lower. Ties lose. First to 3.' },
+  { id: 'blackjack', name: 'Blackjack', sub: 'Closest to 21', tag: 'Luck', fn: blackjack, controls: 'Hit or stand. First to win 3 hands.' },
+  { id: 'snake', name: 'Snake Duel', sub: 'Last one alive', tag: 'Reflex', fn: snakeDuel, controls: 'P1: WASD or swipe. P2: arrow keys.' },
+  { id: 'pacman', name: 'Pac-Man Chase', sub: 'Eat or catch', tag: 'Reflex', fn: pacChase, controls: 'Pac-Man: WASD or swipe. Ghost: arrow keys.' },
+  { id: 'whack', name: 'Whack Race', sub: 'First to 10 moles', tag: 'Reflex', fn: whackRace, controls: 'Click a mole, or P1: QWE/ASD/ZXC. P2: UIO/JKL/M,.' },
+  { id: 'ctf', name: 'Flag Run', sub: 'Steal the flag', tag: 'Reflex', fn: flagRun, controls: 'P1: WASD or swipe. P2: arrow keys.' },
+  { id: 'golf', name: 'Mini Golf', sub: 'Fewest strokes', tag: 'Reflex', fn: miniGolf, controls: 'Drag back from your ball, then let go to putt. Fewest strokes over 3 holes wins.' },
+  { id: 'rps', name: 'Rock Paper Scissors', sub: 'First to 3', tag: 'Luck', fn: rps, controls: 'Pick a hand.' },
+  { id: 'coin', name: 'Coin Duel', sub: 'Call it', tag: 'Luck', fn: coinDuel, controls: 'Call heads or tails.' }
+];
