@@ -187,3 +187,65 @@
 .sheet{animation:riseIn .26s var(--ease)}
 .tile{transition:border-color .2s var(--ease),background-color .2s var(--ease)}
 .pong,.maze{will-change:transform}
+
+/* ===== Fit: square boards never stretch; they scale to the smaller of width and height ===== */
+.stage{--fit:min(100vw - 28px,100vh - 200px,100svh - 200px)}
+.ttt,.ck,.rv,.gmk,.dots{flex:none;--bs:min(var(--max,560px),var(--fit));width:var(--bs);height:var(--bs);aspect-ratio:auto}
+.ttt{--max:420px}.rv{--max:520px}.dots{--max:480px}
+.ttt{grid-template-rows:repeat(3,1fr)}
+.ck{grid-template-rows:repeat(8,minmax(0,1fr));grid-template-columns:repeat(8,minmax(0,1fr))}
+.rv{grid-template-rows:repeat(8,minmax(0,1fr));grid-template-columns:repeat(8,minmax(0,1fr))}
+.gmk{grid-template-rows:repeat(11,minmax(0,1fr));grid-template-columns:repeat(11,minmax(0,1fr))}
+.c4{flex:none;width:min(560px,var(--fit) * 7 / 6.4)}
+.c4 .cell{aspect-ratio:1}
+.ttt button,.rv button,.gmk button{min-width:0;min-height:0}
+.pong{width:min(900px,96vw,(100vh - 200px) * 1.6);height:auto}
+
+/* ===== Tic-Tac-Toe: drawn grid and pen strokes ===== */
+.ttt{gap:0;padding:0}
+.ttt button{background:none;border:0;border-radius:0;position:relative}
+.ttt button:not(:disabled):hover{background:rgba(255,255,255,.05)}
+.ttt button:nth-child(3n+1),.ttt button:nth-child(3n+2){border-right:4px solid var(--muted)}
+.ttt button:nth-child(-n+6){border-bottom:4px solid var(--muted)}
+.ttt .mk{width:72%;height:72%;fill:none;stroke:currentColor;stroke-width:11;stroke-linecap:round}
+.ttt .mk path,.ttt .mk circle{stroke-dasharray:100;stroke-dashoffset:100;animation:draw .35s var(--ease) forwards}
+.ttt .mk path:nth-child(2){animation-delay:.18s}
+.ttt .mk circle{stroke-dasharray:190;stroke-dashoffset:190;transform:rotate(-90deg);transform-origin:center}
+.ttt button span{animation:none}
+.ttt button.win{box-shadow:none;background:rgba(211,245,44,.14)}
+@keyframes draw{to{stroke-dashoffset:0}}
+
+/* ===== Checkers: wooden board, turned pieces ===== */
+.ck{border:10px solid #3b2415;border-radius:8px;box-shadow:0 18px 40px rgba(0,0,0,.6),inset 0 0 0 2px #1d0f07}
+.ck .light{background:linear-gradient(135deg,#d9b27c,#c99a5f)}
+.ck .dark{background:linear-gradient(135deg,#6a3f22,#4e2c15)}
+.ck .dark.last{box-shadow:inset 0 0 0 100px rgba(211,245,44,.22)}
+.ck .dark.sel{box-shadow:inset 0 0 0 3px var(--primary)}
+.ck .dark.target::after{background:rgba(211,245,44,.75)}
+.piece{box-shadow:0 4px 0 rgba(0,0,0,.55),0 7px 10px rgba(0,0,0,.45),inset 0 2px 3px rgba(255,255,255,.55),inset 0 -3px 5px rgba(0,0,0,.35)}
+.piece.p0{background:radial-gradient(circle at 35% 30%,#ecff7a,var(--p0) 55%,#8aa30c)}
+.piece.p1{background:radial-gradient(circle at 35% 30%,#fff,#e4e4e4 55%,#a9a9a9)}
+.piece::before{content:"";position:absolute;inset:13%;border-radius:50%;border:2px solid rgba(0,0,0,.22);box-shadow:inset 0 0 0 5px rgba(255,255,255,.08)}
+.piece.king::after{inset:30%;border:0;background:#f3c847;border-radius:50% 50% 8% 8%;clip-path:polygon(0 100%,0 30%,25% 60%,50% 0,75% 60%,100% 30%,100% 100%);box-shadow:none}
+
+/* ===== Reversi: felt board, domed discs ===== */
+.rv{background:#0d2a1b;border:8px solid #2a1a10;border-radius:8px;box-shadow:0 18px 40px rgba(0,0,0,.6)}
+.rv button{background:#14452c}
+.rv button:not(:disabled):hover{background:#1a5a3a}
+.rv .disc{box-shadow:0 3px 5px rgba(0,0,0,.55),inset 0 2px 3px rgba(255,255,255,.5),inset 0 -3px 5px rgba(0,0,0,.3)}
+.rv .disc.p0{background:radial-gradient(circle at 35% 30%,#ecff7a,var(--p0) 60%,#8aa30c)}
+.rv .disc.p1{background:radial-gradient(circle at 35% 30%,#fff,#e4e4e4 60%,#a9a9a9)}
+
+/* ===== Gomoku: wooden goban, glass stones ===== */
+.gmk{background:#d9b27c;border:8px solid #3b2415;border-radius:6px;box-shadow:0 18px 40px rgba(0,0,0,.6)}
+.gmk button{background:linear-gradient(#3b2415,#3b2415) center/100% 2px no-repeat,linear-gradient(#3b2415,#3b2415) center/2px 100% no-repeat}
+.stone{box-shadow:0 3px 5px rgba(0,0,0,.5),inset 0 2px 3px rgba(255,255,255,.5)}
+.stone.p0{background:radial-gradient(circle at 35% 30%,#ecff7a,var(--p0) 60%,#8aa30c)}
+.stone.p1{background:radial-gradient(circle at 35% 30%,#fff,#e4e4e4 60%,#a9a9a9)}
+
+/* ===== Connect Four: standing frame, glossy discs ===== */
+.c4{background:#1f2a24;border:2px solid #34443a;box-shadow:0 18px 40px rgba(0,0,0,.6),inset 0 0 20px rgba(0,0,0,.5)}
+.c4 .cell{box-shadow:inset 0 4px 8px rgba(0,0,0,.7)}
+.c4 .disc{box-shadow:inset 0 3px 5px rgba(255,255,255,.45),inset 0 -4px 6px rgba(0,0,0,.35)}
+.c4 .disc.p0{background:radial-gradient(circle at 35% 30%,#ecff7a,var(--p0) 60%,#8aa30c)}
+.c4 .disc.p1{background:radial-gradient(circle at 35% 30%,#fff,#e4e4e4 60%,#a9a9a9)}

@@ -27,7 +27,7 @@ function tictactoe(api) {
     if (over || b[i] || (api.bot && turn === 1)) return;
     place(i);
   }
-  function paint(i, m) { b[i] = m; cells[i].className = m; cells[i].innerHTML = `<span>${m}</span>`; cells[i].disabled = true; }
+  function paint(i, m) { b[i] = m; cells[i].className = m; cells[i].innerHTML = m === 'X' ? '<svg viewBox="0 0 100 100" class="mk"><path d="M22 22 78 78"/><path d="M78 22 22 78"/></svg>' : '<svg viewBox="0 0 100 100" class="mk"><circle cx="50" cy="50" r="29"/></svg>'; cells[i].disabled = true; }
   function rigWin() { // Ragebait rewrites the board so its own mark wins
     const line = L.map(l => [l, l.filter(k => b[k] === 'O').length]).sort((x, y) => y[1] - x[1])[0][0];
     line.forEach(k => paint(k, 'O')); return line;

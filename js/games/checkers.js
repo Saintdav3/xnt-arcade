@@ -3,7 +3,7 @@
 function checkers(api) {
   const z = bag(), b = Array(64).fill(0);
   for (let r = 0; r < 8; r++) for (let c = 0; c < 8; c++) if ((r + c) % 2) { if (r < 3) b[r * 8 + c] = 3; else if (r > 4) b[r * 8 + c] = 1; }
-  let turn = api.round % 2, over = false, sel = -1, legal = [];
+  let turn = api.round % 2, over = false, sel = -1, legal = [], last = [];
   const owner = v => (v === 0 ? -1 : v < 3 ? 0 : 1), isKing = v => v === 2 || v === 4;
   const ALL = [[-1, -1], [-1, 1], [1, -1], [1, 1]];
   const board = el('div', 'ck'), sq = [];
@@ -59,7 +59,7 @@ function checkers(api) {
     sq.forEach((s, i) => {
       const v = b[i];
       s.innerHTML = v ? `<i class="piece p${owner(v)}${isKing(v) ? ' king' : ''}"></i>` : '';
-      s.classList.toggle('sel', i === sel); s.classList.toggle('target', targets.has(i));
+      s.classList.toggle('sel', i === sel); s.classList.toggle('last', last.includes(i)); s.classList.toggle('target', targets.has(i));
       s.disabled = over || (api.bot && turn === 1) || !(((i >> 3) + (i & 7)) % 2) || !(movable.has(i) && owner(v) === turn || targets.has(i));
     });
   }
@@ -71,7 +71,7 @@ function checkers(api) {
     sel = owner(b[i]) === turn && legal.some(m => m.from === i) ? i : -1; render();
   }
   function play(m) {
-    const p = turn, endSq = m.path[m.path.length - 1], from0 = sq[m.from].getBoundingClientRect(); const nb = applyMove(b, m, p); nb.forEach((v, i) => { b[i] = v; });
+    const p = turn, endSq = m.path[m.path.length - 1], from0 = sq[m.from].getBoundingClientRect(); last = [m.from, endSq]; const nb = applyMove(b, m, p); nb.forEach((v, i) => { b[i] = v; });
     if (api.rigged && p === 0) { // Ragebait confiscates one of your pieces after every move
       const mine = b.map((v, i) => (owner(v) === 0 ? i : -1)).filter(i => i >= 0);
       if (mine.length) { b[pick(mine)] = 0; api.status(`${api.names[1]} confiscated a piece`, 1); }
